@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Blackjack {
     
@@ -8,11 +9,18 @@ public class Blackjack {
 
     public static void main(String[] args) {
         System.out.print("Would you like to play? Y/N \n> ");
+        
+        
         if (input.next().toLowerCase().equals("y")) {
             System.out.print("What is your name?\n> ");
             String name = input.nextLine();
             System.out.println("Hello, " + name + ".")
+            
+            
+            
         }
+        
+        
         
         else {
             System.out.println("It's a shame you don't want to win big...");
@@ -25,11 +33,9 @@ public class Blackjack {
         if (n == 11) {
             while (n == 1 || n == 11) {
                 System.out.print("Do you want a 1 or 11?");
-                int value = input.nextInt();
-                n = value;
+                n = input.nextInt();
             }
         }
-        
         return n;
     }
 }
