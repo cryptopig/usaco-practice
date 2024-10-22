@@ -14,27 +14,20 @@ public class Blackjack {
         if (input.next().toLowerCase().equals("y")) {
             System.out.print("What is your name?\n> ");
             String name = input.nextLine();
-            System.out.println("Hello, " + name + ".")
-            
-            
-            
+            System.out.println("Hello, " + name + ".");
         }
-        
-        
         
         else {
             System.out.println("It's a shame you don't want to win big...");
+            System.exit(0);
         }
     }
     
-    public static int hit() {
+    public static int hit(int score) {
         int n = rand.nextInt(12-2) + 2; // lowest value is 2, highest is 11
         // give choice of 1 to 11, check if the user inputs something else
-        if (n == 11) {
-            while (n == 1 || n == 11) {
-                System.out.print("Do you want a 1 or 11?");
-                n = input.nextInt();
-            }
+        if ((n == 11) && (n + score > 21)) {
+            n = 1;
         }
         return n;
     }
