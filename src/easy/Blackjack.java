@@ -10,35 +10,63 @@ public class Blackjack {
     public static void main(String[] args) {
         System.out.println("Would you like to play? Y/N");
         // if user inputs anything except for y
-        if (!input.next().toLowerCase().equals("y")) {
+        if (!input.next().equalsIgnoreCase("y")) {
             System.out.println("It's a shame you don't want to win big...");
             // exits the program forcefully, so while loop doesn't run
             System.exit(0);
         }
-        
+
+        System.out.println("How much do you want to wager?");
+        double wager = input.nextDouble();
+
+        // loop to deal out the hand
+        for (int i = 1; i <= 2; i++) {
+            int card = hit(playerScore);
+            playerScore += card;
+
+            card = hit(dealerScore);
+            dealerScore += card;
+            if (i == 1) {
+                System.out.println("Dealer's face-up card: " + card);
+            }
+        }
+        System.out.println("Your hand total: " + playerScore);
+
         while (playerScore < 21) {
             String choice = "";
             System.out.println("Do you want to Hit [H] or Stand [S]?");
             choice = input.next();
             // takes care of all input besides S
-            if (!choice.toLowerCase().equals("s")) {
+            if (!choice.equalsIgnoreCase("s")) {
                 playerScore += hit(playerScore);
-                System.out.println(playerScore);
+                System.out.println("Your hand total: " + playerScore);
             }
             
-            // if the player stands
+            // if the player stands, it leaves the loop
             else {
-                
+                break;
             }
         }
-        
+        while (dealerScore < 17) {
+            dealerScore += hit(dealerScore);
+        }
+
         if (playerScore > 21) {
-            System.out.println("You went bust! Better luck next time.");
+            System.out.println("\nBust! Better luck next time.\n");
+        } else if (dealerScore > 21 ) {
+            System.out.println("\nThe dealer bust! You won.\n");
+        } else if (playerScore == dealerScore) {
+            System.out.println("\nTie game!\n");
+        } else if (playerScore == 21) {
+            System.out.println("\n21! You win.\n");
+        } else if(dealerScore > playerScore) {
+            System.out.println("\nDealer won! Better luck next time.\n");
+        } else {
+            System.out.println("\nYou won!\n");
         }
-        
-        else {
-            System.out.println("You won!");
-        }
+
+        System.out.println("Your hand total: " + playerScore);
+        System.out.println("Dealer's hand total: " + dealerScore);
     }
     
     public static int hit(int score) {
