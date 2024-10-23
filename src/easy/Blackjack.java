@@ -9,15 +9,14 @@ public class Blackjack {
 
     public static void main(String[] args) {
         double gains = 0;
-        while (true) {    
-            System.out.println("Would YOU like to play? Y/N");
+        System.out.println("Would YOU like to play? Y/N");
             // if user inputs anything except for y
             if (!input.next().equalsIgnoreCase("y")) {
                 System.out.println("It's a shame YOU don't want to win big...");
                 // exits the program forcefully, so while loop doesn't run
                 System.exit(0);
             }
-
+        while (true) {    
             double wager = 0;
             while (!(wager > 0)) {
                 System.out.println("How much do YOU want to wager? It must be a bet greater than 0.");
@@ -41,12 +40,13 @@ public class Blackjack {
                 choice = input.next();
                 // takes care of all input besides S
                 if (!choice.equalsIgnoreCase("s")) {
-                    playerScore += hit(playerScore);
-                    System.out.println("YOUR hand total: " + playerScore);
+                    int card = hit(playerScore);
+                    playerScore += card;
+                    System.out.println("You draw " + card + "." + " YOUR hand total: " + playerScore);
                 }
                 // if the player stands, it leaves the loop
                 else {
-                    System.out.println("DEALER'S turn! The game ends when the DEALER stands.");
+                    System.out.println("DEALER'S turn! The game ends when the DEALER ends.");
                     break;
                 }
             }
