@@ -8,18 +8,36 @@ public class Blackjack {
     static int playerScore,dealerScore;
 
     public static void main(String[] args) {
-        System.out.print("Would you like to play? Y/N \n> ");
+        System.out.println("Would you like to play? Y/N");
+        // if user inputs anything except for y
+        if (!input.next().toLowerCase().equals("y")) {
+            System.out.println("It's a shame you don't want to win big...");
+            // exits the program forcefully, so while loop doesn't run
+            System.exit(0);
+        }
         
+        while (playerScore < 21) {
+            String choice = "";
+            System.out.println("Do you want to Hit [H] or Stand [S]?");
+            choice = input.next();
+            // takes care of all input besides S
+            if (!choice.toLowerCase().equals("s")) {
+                playerScore += hit(playerScore);
+                System.out.println(playerScore);
+            }
+            
+            // if the player stands
+            else {
+                
+            }
+        }
         
-        if (input.next().toLowerCase().equals("y")) {
-            System.out.print("What is your name?\n> ");
-            String name = input.nextLine();
-            System.out.println("Hello, " + name + ".");
+        if (playerScore > 21) {
+            System.out.println("You went bust! Better luck next time.");
         }
         
         else {
-            System.out.println("It's a shame you don't want to win big...");
-            System.exit(0);
+            System.out.println("You won!");
         }
     }
     
