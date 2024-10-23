@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Blackjack {
-    
     static Scanner input = new Scanner(System.in);
     static Random rand = new Random();
     static int playerScore,dealerScore;
