@@ -28,6 +28,8 @@ public class Blackjack {
                 int card = hit(playerScore);
                 playerScore += card;
                 card = hit(dealerScore);
+                System.out.println("YOUR card #" + i +": " + card);
+                
                 dealerScore += card;
                 if (i == 1) {
                     System.out.println("DEALER'S face-up card: " + card);
@@ -91,12 +93,12 @@ public class Blackjack {
     }
     // drawing cards
     public static int hit(int score) {
-        int n = rand.nextInt(13-2) + 1; // lowest value is 2, highest is 13
+        int n = rand.nextInt(13) + 1; // lowest value is 1, highest is 13 
         // give choice of 1 to 11, check if the user inputs something else
-        if ((n == 1) && (n + score <= 21)) {
+        if ((n == 1) && (11 + score < 21)) {
             n = 11;
         }
-        if (n == 11 || n == 12 || n == 13) {
+        else if (n == 11 || n == 12 || n == 13) {
             n = 10;
         }
         return n;
