@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -33,7 +34,7 @@ public class Blackjack {
         System.out.println("Your hand total: " + playerScore);
 
         while (playerScore < 21) {
-            String choice = "";
+            String choice;
             System.out.println("Do you want to Hit [H] or Stand [S]?");
             choice = input.next();
             // takes care of all input besides S
@@ -44,6 +45,7 @@ public class Blackjack {
             
             // if the player stands, it leaves the loop
             else {
+                System.out.println("Dealers turn! The game ends when the dealer stands.");
                 break;
             }
         }
@@ -53,22 +55,30 @@ public class Blackjack {
 
         if (playerScore > 21) {
             System.out.println("\nBust! Better luck next time.\n");
+            System.out.println("You walk out of this game with: " + outcome(wager, "loss" + " dollars"));
         } else if (dealerScore > 21 ) {
             System.out.println("\nThe dealer bust! You won.\n");
+            System.out.println("You walk out of this game with: $" + outcome(wager, "win"));
+
         } else if (playerScore == dealerScore) {
             System.out.println("\nTie game!\n");
+            System.out.println("You walk out of this game with: $" + outcome(wager, "draw"));
         } else if (playerScore == 21) {
             System.out.println("\n21! You win.\n");
+            System.out.println("You walk out of this game with: $" + outcome(wager, "win"));
         } else if(dealerScore > playerScore) {
             System.out.println("\nDealer won! Better luck next time.\n");
+            System.out.println("You walk out of this game with: " + outcome(wager, "loss") + " dollars");
         } else {
             System.out.println("\nYou won!\n");
+            System.out.println("You walk out of this game with: $" + outcome(wager, "win"));
         }
 
         System.out.println("Your hand total: " + playerScore);
         System.out.println("Dealer's hand total: " + dealerScore);
     }
-    
+
+    // drawing cards
     public static int hit(int score) {
         int n = rand.nextInt(12-2) + 2; // lowest value is 2, highest is 11
         // give choice of 1 to 11, check if the user inputs something else
@@ -77,4 +87,17 @@ public class Blackjack {
         }
         return n;
     }
+
+   // function to handle the wager for every outcome of the game
+   public static double outcome(double wager, String outcome) {
+        if (Objects.equals(outcome, "win")) {
+            return 2*wager;
+        }
+        if (Objects.equals(outcome, "draw")) {
+            return wager * 0;
+        }
+        else {
+            return -wager;
+        }
+   }
 }
