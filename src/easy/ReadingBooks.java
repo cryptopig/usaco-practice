@@ -9,7 +9,7 @@ public class ReadingBooks {
         int bookTimes[] = {input.nextInt(),input.nextInt(),input.nextInt()};
         
         // get minimum value in the array
-        int shortestTime = bookTimes[0]];
+        int shortestTime = bookTimes[0];
         int sum = 0;
         for (int i = 0; i < bookTimes.length; i++) {
             if (bookTimes[i] < shortestTime) {
