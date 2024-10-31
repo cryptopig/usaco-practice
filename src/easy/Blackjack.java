@@ -98,7 +98,7 @@ public class Blackjack {
         if ((n == 1) && (11 + score < 21)) {
             n = 11;
         }
-        else if (n == 11 || n == 12 || n == 13) {
+        else if (n > 10) {
             n = 10;
         }
         return n;
