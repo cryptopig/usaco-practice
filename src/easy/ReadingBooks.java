@@ -8,7 +8,7 @@ public class ReadingBooks {
         int bookTimes[] = new int[totalBooks];
         // variable array sisze handling
         for (int i = 0; i < totalBooks; i++) bookTimes[i] = input.nextInt();
-        // get minimum value in the array
+        // get maximum value in the array
         int maxTime = 0;
         int sum = 0;
         for (int i = 0; i < bookTimes.length; i++) {
@@ -17,6 +17,7 @@ public class ReadingBooks {
             }
             sum += bookTimes[i];
         }
+        // sum - maxTime is sum of all other book times
         if ((sum-maxTime) < maxTime) {
             System.out.println(maxTime*2);
         }
