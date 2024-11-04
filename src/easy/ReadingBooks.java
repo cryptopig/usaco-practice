@@ -22,7 +22,7 @@ public class ReadingBooks {
             System.out.println(maxTime*2);
         }
         else {
-            System.out.println(2*(sum-maxTime));
+            System.out.println(sum);
         }
     }
 }
