@@ -1,3 +1,5 @@
+// https://usaco.org/index.php?page=viewproblem2&cpid=663
+
 import java.util.*;
 class SquarePasture {
     public static void main(String[] args) {
@@ -13,7 +15,6 @@ class SquarePasture {
         pasture2.put("y1", input.nextInt());
         pasture2.put("x2", input.nextInt());
         pasture2.put("y2", input.nextInt());
-        
 /* max side length is maximum of largest x minus 
 smallest x, largest y minus smallest y */
     int[] x_values = {pasture1.get("x1"), pasture1.get("x2"), pasture2.get("x1"), pasture2.get("x2")};
@@ -35,7 +36,6 @@ smallest x, largest y minus smallest y */
     }
     int y_length = max-min;
     int n = Math.max(y_length,x_length);
-    
     System.out.println(n*n);
     }
 }
