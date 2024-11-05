@@ -1,16 +1,14 @@
-// https://usaco.org/index.php?page=viewproblem2&cpid=663
-
 import java.util.*;
 class SquarePasture {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Dictionary<String, Integer> pasture1 = new Hashtable<>();
+        Dictionary<String, Integer> pasture2 = new Hashtable<>();
         pasture1.put("x1", input.nextInt());
         pasture1.put("y1", input.nextInt());
         pasture1.put("x2", input.nextInt());
         pasture1.put("y2", input.nextInt());
-        
-        Dictionary<String, Integer> pasture2 = new Hashtable<>();
+    
         pasture2.put("x1", input.nextInt());
         pasture2.put("y1", input.nextInt());
         pasture2.put("x2", input.nextInt());
@@ -27,7 +25,7 @@ smallest x, largest y minus smallest y */
         if (x_values[i] > max) max = x_values[i];
     }
     int x_length = max-min;
-    
+
     min = y_values[0];
     max = 0;
     for (int i = 0; i < y_values.length; i++) {
