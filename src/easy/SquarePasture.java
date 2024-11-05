@@ -14,5 +14,10 @@ class SquarePasture {
         pasture_2.put("x2", input.nextInt());
         pasture_2.put("y2", input.nextInt());
         
+        // max side length
+        int x_length = Math.abs(pasture_2.get("x2") - pasture_1.get("x1"));
+        int y_length = Math.abs(pasture_2.get("y2") - pasture_1.get("y1"));
+        System.out.println(Math.max(x_length, y_length));
+        
     }
 }
