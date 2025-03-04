@@ -1,10 +1,11 @@
+import java.util.*;
+
 public class PasswordManager {
     public static void main(String[] args) {
         PasswordGenerator generator = new PasswordGenerator();
         Password password = generator.generate_password(8);
-        System.out.println(password.returnPassword());
-
-       
+        System.out.println("Password generated.");
+        System.out.println(password.getPassword());
     }
 
 }
@@ -18,28 +19,33 @@ class Password {
         this.contents = contents;
     }
 
-    public String returnPassword() {
+    public String getPassword() {
         return this.contents;
     }
 }
 
 class PasswordGenerator {
-    private int[] numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private String numbers = "1234567890";
     private static String letters = "QqwWeErRtTyYuUiIoOpPaAsSdDfFgGhHjJkKlLZzXxCcVvBbNnMm";
     private String characters = "!@#$%^&*()_+{}|:<>?,.-=[]";
 
     public Password generate_password(int length) {
         String contents = "";
         for (int i = 0; i < length; i++) {
-            contents += random(0, letters.length());
+            double charChance = Math.round(Math.random()*3);
+            if (charChance == 1) {contents += letters.charAt(random(0, letters.length()));}
+            if (charChance == 2) {contents += characters.charAt(random(0, characters.length()));}
+            if (charChance == 3) {contents += numbers.charAt(random(0, numbers.length()));}
+            
         }
 
 
-        Password generatedPassword = new Password(length, contents);
+        Password generatedPassword = new Password(contents);
         return generatedPassword;
     }
 
     public int random(int min, int max) {
+        Random rand = new Random();
         return (rand.nextInt(max - min + 1) + min);
     }
 
