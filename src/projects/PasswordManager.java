@@ -6,10 +6,22 @@ public class PasswordManager {
     static Scanner input = new Scanner(System.in); // TODO: implement user choice later
     public static void main(String[] args) {
         PasswordGenerator generator = new PasswordGenerator();
-        Password password = new Password(generator.generate_password(8));
-        System.out.println("Password generated.");
-        System.out.println(password.toString());
-        password.checkStrength();
+        System.out.println("Would you like to [g] generate, or \n[c] to check password strength?");
+        String choice = input.nextLine();
+
+        if (choice.toLowerCase() == "g" || choice.toLowerCase() == "generate") {
+            System.out.println("How long would you like the password to be?");
+            Password password = new Password(generator.generate_password(input.nextInt()));
+            System.out.println("Your password: " + password.toString() + ".");
+            
+        }
+
+        else {
+            System.out.print("Input your password here:\n> ");
+            Password password = new Password(input.nextLine());
+            password.checkStrength();
+        }
+        
 
         input.close();
     }
