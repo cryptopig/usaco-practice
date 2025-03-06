@@ -87,19 +87,14 @@ class PasswordGenerator {
 
     public String generate_password(int length) {
         String contents = "";
-        // initial value of contents
+        // initialializes with random letters
         for (int i = 0; i < length; i++) {
-            contents += "a";
+            contents += letters.charAt(random(0, letters.length() - 1));
         }
         // easier to treat contents as an array
         char[] contentsArray = contents.toCharArray();
         // main loop
         for (int i = 0; i < length; i++) {
-            // for random letters
-            for (int j = 0; j < length / 2; j++) {
-                int index = random(0, contentsArray.length - 1);
-                contentsArray[index] = letters.charAt(random(0, letters.length() - 1));
-            }
             // for numbers
             for (int j = 0; j < length / 3; j++) {
                 int index = random(0, contentsArray.length - 1);
