@@ -79,7 +79,6 @@ class Password {
         checkStrength(this.contents);
     }
 }
-
 class PasswordGenerator {
     public static String numbers = "1234567890";
     public static String letters = "QqwWeErRtTyYuUiIoOpPaAsSdDfFgGhHjJkKlLZzXxCcVvBbNnMm";
@@ -87,29 +86,28 @@ class PasswordGenerator {
 
     public String generate_password(int length) {
         String contents = "";
-        // initialializes with random letters
+        // initialization - random letters
         for (int i = 0; i < length; i++) {
             contents += letters.charAt(random(0, letters.length() - 1));
         }
-        // easier to treat contents as an array
+
         char[] contentsArray = contents.toCharArray();
-        // main loop
-        for (int i = 0; i < length; i++) {
-            // for numbers
-            for (int j = 0; j < length / 3; j++) {
-                int index = random(0, contentsArray.length - 1);
-                contentsArray[index] = numbers.charAt(random(0, numbers.length() - 1));
-            }
-            // for characters
-            for (int j = 0; j < length / 4 ; j++) {
-                int index = random(0, contentsArray.length - 1);
-                contentsArray[index] = characters.charAt(random(0, characters.length() - 1));
-            }
+
+        // characters
+        for (int i = 0; i < length / 3; i++) {
+            int index = random(0, contentsArray.length - 1);
+            contentsArray[index] = numbers.charAt(random(0, numbers.length() - 1));
         }
+
+        // numbers
+        for (int i = 0; i < length / 4 ; i++) {
+            int index = random(0, contentsArray.length - 1);
+            contentsArray[index] = characters.charAt(random(0, characters.length() - 1));
+        }
+        
         contents = String.valueOf(contentsArray);
         return contents;
     }
-
     public int random(int min, int max) {
         Random rand = new Random();
         return (rand.nextInt(max - min + 1) + min);
