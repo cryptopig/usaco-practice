@@ -1,33 +1,27 @@
 import java.util.*;
-
 public class PasswordManager {
-
-
     static Scanner input = new Scanner(System.in); // TODO: implement user choice later
     public static void main(String[] args) {
         PasswordGenerator generator = new PasswordGenerator();
-        System.out.println("Would you like to [g] generate, or \n[c] to check password strength?");
-        String choice = input.nextLine();
+        System.out.print("Would you like to [g] generate, or \n[c] to check password strength? \n> ");
+        String choice = input.next();
 
-        if (choice.toLowerCase() == "g" || choice.toLowerCase() == "generate") {
-            System.out.println("How long would you like the password to be?");
-            Password password = new Password(generator.generate_password(input.nextInt()));
+        if (choice.toLowerCase().equals("g") || choice.toLowerCase().equals("generate")) {
+            System.out.print("How long would you like the password to be? \n> ");
+            int length = input.nextInt();
+            Password password = new Password(generator.generate_password(length));
             System.out.println("Your password: " + password.toString() + ".");
-            
         }
-
         else {
-            System.out.print("Input your password here:\n> ");
-            Password password = new Password(input.nextLine());
+            System.out.print("Input your password here: \n> ");
+            choice = input.next();
+            Password password = new Password(choice);
+            System.out.println(password.toString());
             password.checkStrength();
         }
-        
-
         input.close();
     }
-
 }
-
 // pw object to make it easier to deal with 
 class Password {
     // constants that define a secure password
@@ -36,18 +30,15 @@ class Password {
     final int MIN_NUMBERS = 3;
 
     private String contents = "1s(.jQ]#145v"; // default password = 1s(.jQ]#145v
-
     public Password(String contents) {
         this.contents = contents;
     }
-
     public String toString() {
         return contents;
     }
-
     // list of reasons why password is unsecure so user can improve password
     // if string argument is provided
-    public ArrayList<String> checkStrength(String contents) {
+    public void checkStrength(String contents) {
         ArrayList<String> reasons = new ArrayList<>();
         int numCount = 0;
         int charCount = 0;
@@ -55,40 +46,38 @@ class Password {
         if (contents.length() < MIN_PASSWORD_LENGTH) {
             reasons.add("Minimum length is 8. ");
         }
-
         for (int i = 0; i < contents.length(); i++) {
-
             /* takes the numbers list from password generator instead of reinitializing it 
              * then checks if the current character is in the list of numbers/characters/etc.
              * and adds to number count/character count/whatever
             */ 
-            
             if (PasswordGenerator.numbers.indexOf(contents.charAt(i)) != -1) {
                 numCount++;
             }
-
             else if (PasswordGenerator.characters.indexOf(contents.charAt(i)) != -1) {
                 charCount++;
             }
         }
-        
         if (numCount < MIN_NUMBERS) {
-            reasons.add("You need at least " + MIN_NUMBERS + "numbers. ");
+            reasons.add("You need at least " + MIN_NUMBERS + " numbers. ");
         }
-
         if (charCount < MIN_CHARACTERS) {
-            reasons.add("You need at least " + MIN_CHARACTERS + "characters. ");
+            reasons.add("You need at least " + MIN_CHARACTERS + " characters. ");
         }
 
-        return reasons;
+        if (reasons.size() != 0) {
+            for (int i = 0; i < reasons.size(); i++) {
+                System.out.println(reasons.get(i));
+            }
+        }
+        else {
+            System.out.println("Your password is strong!");
+        }
     }
 
     // method overloading if string argument is not provided
-    public ArrayList<String> checkStrength() {
-        ArrayList<String> reasons = new ArrayList<>();
-
-        reasons = checkStrength(this.contents);
-        return reasons;
+    public void checkStrength() {
+        checkStrength(this.contents);
     }
 }
 
@@ -99,13 +88,34 @@ class PasswordGenerator {
 
     public String generate_password(int length) {
         String contents = "";
+        // initial value of contents
         for (int i = 0; i < length; i++) {
-            double charChance = Math.round(Math.random()*6);
-            if (charChance <= 4) {contents += letters.charAt(random(0, letters.length()));}
-            if (charChance == 5) {contents += characters.charAt(random(0, characters.length()));}
-            if (charChance == 6) {contents += numbers.charAt(random(0, numbers.length()));}
-            
+            contents += "a";
         }
+        // easier to treat contents as an array
+        char[] contentsArray = contents.toCharArray();
+
+        // TODO: remove this after debugging
+
+        // main loop
+        for (int i = 0; i < length; i++) {
+            // for random letters
+            for (int j = 0; j < length / 2; j++) {
+                int index = random(0, contentsArray.length - 1);
+                contentsArray[index] = letters.charAt(random(0, letters.length() - 1));
+            }
+            // for numbers
+            for (int j = 0; j < length / 3; j++) {
+                int index = random(0, contentsArray.length - 1);
+                contentsArray[index] = numbers.charAt(random(0, numbers.length() - 1));
+            }
+            // for characters
+            for (int j = 0; j < length / 4 ; j++) {
+                int index = random(0, contentsArray.length - 1);
+                contentsArray[index] = characters.charAt(random(0, characters.length() - 1));
+            }
+        }
+        contents = String.valueOf(contentsArray);
         return contents;
     }
 
