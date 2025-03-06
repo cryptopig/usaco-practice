@@ -1,6 +1,6 @@
 import java.util.*;
 public class PasswordManager {
-    static Scanner input = new Scanner(System.in); // TODO: implement user choice later
+    static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         PasswordGenerator generator = new PasswordGenerator();
         System.out.print("Would you like to [g] generate, or \n[c] to check password strength? \n> ");
@@ -16,13 +16,14 @@ public class PasswordManager {
             System.out.print("Input your password here: \n> ");
             choice = input.next();
             Password password = new Password(choice);
-            System.out.println(password.toString());
+            System.out.println("Your password: " + password.toString());
             password.checkStrength();
         }
         input.close();
     }
 }
-// pw object to make it easier to deal with 
+
+// made password an object for practice
 class Password {
     // constants that define a secure password
     final int MIN_PASSWORD_LENGTH = 8;
@@ -94,9 +95,6 @@ class PasswordGenerator {
         }
         // easier to treat contents as an array
         char[] contentsArray = contents.toCharArray();
-
-        // TODO: remove this after debugging
-
         // main loop
         for (int i = 0; i < length; i++) {
             // for random letters
