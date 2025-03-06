@@ -22,7 +22,6 @@ public class PasswordManager {
         input.close();
     }
 }
-
 // made password an object for practice
 class Password {
     // constants that define a secure password
@@ -75,7 +74,6 @@ class Password {
             System.out.println("Your password is strong!");
         }
     }
-
     // method overloading if string argument is not provided
     public void checkStrength() {
         checkStrength(this.contents);
