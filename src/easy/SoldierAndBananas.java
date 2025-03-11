@@ -8,13 +8,11 @@ public class SoldierAndBananas {
         int owned = input.nextInt();
         int total = input.nextInt();
         int sum = 0;
-
         for (int i = 1; i <= total; i++) {
             sum += i;
-        }
-        
+        } 
         System.out.println((sum*cost_i) - owned);
-        
+        input.close();
     }
 }
 
